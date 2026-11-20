@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Кофейня «5 ЧУВСТВ» Краснодар | Доставка кофе, завтраков и десертов</title>
+  <meta name="description" content="Спешелти кофейня и пекарня «5 ЧУВСТВ» в Краснодаре (Любимово и Образцово). Свежеобжаренный кофе, завтраки весь день с 07:00, круассаны, сырники и авторские напитки.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =======================================================================
+       1. ВЕРХНЯЯ СЛУЖЕБНАЯ СТРОКА (Top Service Bar)
+       ======================================================================= -->
+  <header class="top-service-bar">
+    <div class="top-bar-container">
+      <div class="top-bar-left">
+        <span class="top-geo-badge">📍 г. Краснодар</span>
+        <span class="top-separator">•</span>
+        <span class="top-hours">⏰ Ежедневно 07:00 – 22:00</span>
+        <span class="top-separator">•</span>
+        <button type="button" class="top-link-btn" id="topAboutBtn">
+          🏛️ О кофейне «5 Чувств»
+        </button>
+      </div>
+      <div class="top-bar-right">
+        <a href="https://yandex.ru/maps/org/5_chuvstv/137565727500/" target="_blank" rel="noopener" class="top-link rating" title="Посмотреть на Яндекс Картах">
+          ⭐ <strong>4.8</strong> (240+ отзывов на Яндекс Картах)
+        </a>
+        <span class="top-separator">•</span>
+        <a href="tel:+79132105087" class="top-link phone">
+          📞 +7 (913) 210-50-87
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       2. ОСНОВНАЯ ШАПКА САЙТА (Main Header)
+       ======================================================================= -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-container">
+      <!-- Логотип бренда -->
+      <a href="#" class="brand-logo" id="logoLink">
+        <div class="logo-emblem">☕</div>
+        <div class="logo-text-block">
+          <span class="brand-title">5 ЧУВСТВ</span>
+          <span class="brand-subtitle">спешелти кофейня & пекарня</span>
+        </div>
+      </a>
+
+      <!-- Выбор филиала / адреса доставки -->
+      <button type="button" class="header-pill-btn address-btn" id="btnSelectAddress" title="Выбрать кофейню или адрес доставки">
+        <span class="pill-icon">📍</span>
+        <div class="address-text-col">
+          <span class="address-sub">Самовывоз или доставка</span>
+          <strong class="address-main" id="currentAddressHeader">мкр. Любимово, 5/1</strong>
+        </div>
+        <span class="arrow-down">▾</span>
+      </button>
+
+      <!-- Поисковая строка с живой фильтрацией -->
+      <div class="header-search-wrap">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="header-search-input" 
+          placeholder="Найти капучино, сырники, круассан..." 
+          autocomplete="off"
+        >
+        <button type="button" class="search-clear-btn" id="searchClearBtn" aria-label="Очистить поиск">✕</button>
+      </div>
+
+      <!-- Действия шапки -->
+      <div class="header-actions">
+        <!-- Кнопка скидок / промокодов -->
+        <button type="button" class="header-circle-btn promo-btn" id="btnHeaderPromo" title="Акции и промокоды">
+          %
+        </button>
+
+        <!-- Кнопка бонусов -->
+        <button type="button" class="bonuses-pill" id="btnHeaderBonuses" title="Бонусная программа">
+          <span class="bonus-icon">⭐</span>
+          <span class="bonus-lbl">Бонусы:</span>
+          <span class="bonus-num" id="bonusValDisplay">350 ₽</span>
+        </button>
+
+        <!-- Кнопка корзины для мобильных -->
+        <button type="button" class="header-cart-mobile-btn" id="btnMobileHeaderCart" aria-label="Открыть корзину">
+          <span class="m-cart-icon">🛍️</span>
+          <span class="mobile-cart-badge" id="mobileHeaderCartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       3. ОСНОВНОЙ КОНТЕНТ (Двухколоночный макет)
+       ======================================================================= -->
+  <main class="page-container">
+    <div class="layout-grid">
+      
+      <!-- ЛЕВАЯ КОЛОНКА (Карусель промо, Фильтры категорий, Блюда меню) -->
+      <section class="main-content-column">
+        
+        <!-- КАРУСЕЛЬ ПРОМО-ПАНЕЛЕЙ (Фирменный теплый кофейный стиль) -->
+        <div class="promo-carousel-section">
+          <div class="promo-carousel-container">
+            <div class="promo-carousel-track" id="promoCarouselTrack">
+              
+              <!-- Слайд 1: Промокод 5ЧУВСТВ -15% -->
+              <div class="promo-banner-slide">
+                <div class="promo-slide-inner terracotta-theme">
+                  <div class="slide-left">
+                    <span class="promo-badge-pill amber">✦ ЗНАКОМСТВО С 5 ЧУВСТВ</span>
+                    <h2 class="slide-heading">Скидка 15% на первый заказ</h2>
+                    <p class="slide-subheading">Попробуйте наш шелковистый спешелти капучино и хрустящую свежую выпечку с приятной скидкой от 500 ₽.</p>
+                    <div class="slide-actions-row">
+                      <button type="button" class="btn-promo-action" id="btnApplyPromo15">Применить скидку -15%</button>
+                      <span class="slide-specs">☕ Спешелти зерно • Доставка от 30 мин</span>
+                    </div>
+                  </div>
+                  <div class="slide-right">
+                    <div class="perforated-ticket" id="ticketCode15" title="Нажмите, чтобы скопировать промокод">
+                      <div class="ticket-cut-top"></div>
+                      <div class="ticket-header">ПРОМОКОД</div>
+                      <div class="ticket-code">5ЧУВСТВ</div>
+                      <div class="ticket-desc">скидка 15% на заказ</div>
+                      <div class="ticket-tap">нажмите для копирования 📋</div>
+                      <div class="ticket-cut-bottom"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Слайд 2: Программа лояльности -->
+              <div class="promo-banner-slide">
+                <div class="promo-slide-inner mocha-theme">
+                  <div class="slide-left">
+                    <span class="promo-badge-pill gold">⭐ КАРТА ГОСТЯ</span>
+                    <h2 class="slide-heading">Каждый 6-й кофе в подарок!</h2>
+                    <p class="slide-subheading">Заказывайте кофе навынос или с доставкой, копите баллы и обменивайте на авторские напитки и десерты.</p>
+                    <div class="slide-actions-row">
+                      <button type="button" class="btn-promo-action secondary" id="btnOpenBonusesModal">Узнать подробнее</button>
+                      <span class="slide-specs">1 бонус = 1 рубль • Списание до 50%</span>
+                    </div>
+                  </div>
+                  <div class="slide-right">
+                    <div class="perforated-ticket gold-ticket" id="ticketLoyaltyCard">
+                      <div class="ticket-cut-top"></div>
+                      <div class="ticket-header">БОНУСЫ</div>
+                      <div class="ticket-code">+350 Б</div>
+                      <div class="ticket-desc">уже на вашем балансе</div>
+                      <div class="ticket-tap">открыть карту лояльности ✨</div>
+                      <div class="ticket-cut-bottom"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Слайд 3: Комбо «Идеальное утро» -->
+              <div class="promo-banner-slide">
+                <div class="promo-slide-inner cream-theme">
+                  <div class="slide-left">
+                    <span class="promo-badge-pill berry">🥞 УТРЕННИЕ КОМБО</span>
+                    <h2 class="slide-heading">Завтраки весь день от 410 ₽</h2>
+                    <p class="slide-subheading">Капучино + фермерские сырники с малиной или круассан с индейкой. Экономия до 60 ₽ в каждом сете!</p>
+                    <div class="slide-actions-row">
+                      <button type="button" class="btn-promo-action berry-btn" id="btnGoToCombos">Выбрать комбо-завтрак</button>
+                      <span class="slide-specs">С 07:00 до 22:00 ежедневно</span>
+                    </div>
+                  </div>
+                  <div class="slide-right">
+                    <div class="perforated-ticket berry-ticket" id="ticketCodeMorning">
+                      <div class="ticket-cut-top"></div>
+                      <div class="ticket-header">СКИДКА</div>
+                      <div class="ticket-code">-60 ₽</div>
+                      <div class="ticket-desc">выгода в комбо-сетах</div>
+                      <div class="ticket-tap">посмотреть наборы 🥐</div>
+                      <div class="ticket-cut-bottom"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Слайд 4: Самовывоз -10% -->
+              <div class="promo-banner-slide">
+                <div class="promo-slide-inner sage-theme">
+                  <div class="slide-left">
+                    <span class="promo-badge-pill sage">🛍️ БЫСТРЫЙ ЗАКАЗ НАВЫНОС</span>
+                    <h2 class="slide-heading">Скидка 10% на заказ с собой</h2>
+                    <p class="slide-subheading">Оформите заказ заранее на сайте — бариста приготовит горячий кофе и теплую выпечку ровно к вашему приходу.</p>
+                    <div class="slide-actions-row">
+                      <button type="button" class="btn-promo-action sage-btn" id="btnActivatePickupPromo">Забрать со скидкой 10%</button>
+                      <span class="slide-specs">мкр. Любимово, 5/1 и Адмирала Макарова, 5к4</span>
+                    </div>
+                  </div>
+                  <div class="slide-right">
+                    <div class="perforated-ticket sage-ticket" id="ticketCodePickup">
+                      <div class="ticket-cut-top"></div>
+                      <div class="ticket-header">СКИДКА</div>
+                      <div class="ticket-code">САМОВЫВОЗ</div>
+                      <div class="ticket-desc">-10% на все позиции</div>
+                      <div class="ticket-tap">нажмите для применения 🛍️</div>
+                      <div class="ticket-cut-bottom"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Стрелки навигации карусели -->
+            <button type="button" class="promo-carousel-nav prev" id="btnPromoPrev" aria-label="Предыдущий промо-баннер">‹</button>
+            <button type="button" class="promo-carousel-nav next" id="btnPromoNext" aria-label="Следующий промо-баннер">›</button>
+
+            <!-- Точки индикаторы -->
+            <div class="promo-carousel-dots" id="promoCarouselDots">
+              <button class="dot-btn active" data-index="0" aria-label="Слайд 1"></button>
+              <button class="dot-btn" data-index="1" aria-label="Слайд 2"></button>
+              <button class="dot-btn" data-index="2" aria-label="Слайд 3"></button>
+              <button class="dot-btn" data-index="3" aria-label="Слайд 4"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- КОМПАКТНАЯ ПАНЕЛЬ КАТЕГОРИЙ (Sticky Chips Bar) -->
+        <nav class="categories-bar-sticky" id="categoriesBar">
+          <div class="compact-categories-track" id="compactCategoriesTrack">
+            <!-- Генерируется динамически через JS -->
+          </div>
+        </nav>
+
+        <!-- СЕКЦИИ КАТАЛОГА МЕНЮ -->
+        <div class="catalog-sections-wrap" id="catalogSectionsWrap">
+          <!-- Генерируется из dishes.json -->
+        </div>
+
+        <!-- О КОНЦЕПЦИИ «5 ЧУВСТВ» (Блок доверия и атмосферы) -->
+        <section class="brand-story-card">
+          <div class="story-header">
+            <span class="story-badge">ФИЛОСОФИЯ ВДОХНОВЕНИЯ</span>
+            <h2 class="story-title">Почему мы называемся «5 ЧУВСТВ»?</h2>
+            <p class="story-subtitle">Кофейня создана для того, чтобы включить все ваши рецепторы восприятия:</p>
+          </div>
+          <div class="senses-grid">
+            <div class="sense-item">
+              <div class="sense-icon">👁️</div>
+              <strong>Зрение</strong>
+              <p>Эстетичная подача, идеальный латте-арт и светлый скандинавский интерьер.</p>
+            </div>
+            <div class="sense-item">
+              <div class="sense-icon">👃</div>
+              <strong>Обоняние</strong>
+              <p>Аромат свежей обжарки 100% арабики и утренних круассанов из печи.</p>
+            </div>
+            <div class="sense-item">
+              <div class="sense-icon">👅</div>
+              <strong>Вкус</strong>
+              <p>Шелковистый баланс авторских рецептур, фермерские сыры и сочные ягоды.</p>
+            </div>
+            <div class="sense-item">
+              <div class="sense-icon">🖐️</div>
+              <strong>Осязание</strong>
+              <p>Бархатистые крафтовые стаканчики, тепло чашки и хрустящая корочка бриоши.</p>
+            </div>
+            <div class="sense-item">
+              <div class="sense-icon">👂</div>
+              <strong>Слух</strong>
+              <p>Теплый уютный лаунж-плейлист, шорох кофемолки и дружелюбный диалог с бариста.</p>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- ПРАВАЯ КОЛОНКА (Фирменная прилипающая корзина десктопа) -->
+      <aside class="desktop-cart-sidebar" id="desktopCartSidebar">
+        <div class="sidebar-cart-box">
+          
+          <!-- Шапка корзины -->
+          <div class="cart-box-header">
+            <div class="cart-header-title-row">
+              <h3 class="cart-title">Ваш заказ</h3>
+              <button type="button" class="btn-clear-cart" id="btnSidebarClearCart" title="Очистить корзину">
+                Очистить
+              </button>
+            </div>
+
+            <!-- Переключатель режима: Доставка / Самовывоз -->
+            <div class="delivery-toggle-switch">
+              <button type="button" class="toggle-mode-btn active" id="cartModeDelivery" data-mode="delivery">
+                🛵 Доставка
+              </button>
+              <button type="button" class="toggle-mode-btn" id="cartModePickup" data-mode="pickup">
+                🛍️ С собой (-10%)
+              </button>
+            </div>
+
+            <!-- Прогресс бесплатной доставки -->
+            <div class="free-delivery-progress-box" id="cartFreeDeliveryBox">
+              <div class="cfd-text-row">
+                <span class="cfd-label" id="cfdText">До бесплатной доставки: <strong>800 ₽</strong></span>
+                <span class="cfd-icon">☕</span>
+              </div>
+              <div class="cfd-bar-track">
+                <div class="cfd-bar-fill" id="cfdFill" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Список позиций в корзине -->
+          <div class="cart-box-body">
+            <!-- Состояние пустой корзины -->
+            <div class="cart-empty-state" id="cartEmptyState">
+              <div class="empty-cup-icon">☕</div>
+              <strong class="empty-title">В корзине пока пусто</strong>
+              <p class="empty-desc">Выберите любимый кофе, сытный завтрак или свежий круассан из меню слева</p>
+            </div>
+
+            <!-- Список товаров -->
+            <div class="cart-items-list" id="cartItemsList">
+              <!-- Товары рендерятся через JS -->
+            </div>
+
+            <!-- Блок приборов / сахара / трубочек -->
+            <div class="cart-cutlery-box" id="cartCutleryBox">
+              <div class="cutlery-info">
+                <span class="cutlery-icon">🥢</span>
+                <div>
+                  <div class="cutlery-title">Приборы и салфетки</div>
+                  <div class="cutlery-sub">Трубочки, сахар, салфетки</div>
+                </div>
+              </div>
+              <div class="counter-stepper mini">
+                <button type="button" class="stepper-btn" id="btnSidebarCutleryDec" aria-label="Меньше приборов">–</button>
+                <span class="stepper-val" id="sidebarCutleryNum">1</span>
+                <button type="button" class="stepper-btn" id="btnSidebarCutleryInc" aria-label="Больше приборов">+</button>
+              </div>
+            </div>
+
+            <!-- Блок ввода промокода -->
+            <div class="cart-promo-input-box" id="cartPromoInputBox">
+              <div class="promo-input-row">
+                <input type="text" id="cartPromoInput" class="promo-text-field" placeholder="Промокод (5ЧУВСТВ)" maxlength="16">
+                <button type="button" class="btn-apply-promo" id="btnCartApplyPromo">ОК</button>
+              </div>
+              <div class="promo-applied-badge" id="cartPromoAppliedBadge" style="display: none;">
+                <span class="p-badge-text" id="cartPromoBadgeText">Скидка 15% применена</span>
+                <button type="button" class="btn-remove-promo" id="btnCartRemovePromo">✕</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Подвал корзины с калькулятором суммы -->
+          <div class="cart-box-footer" id="cartSidebarFooter">
+            <div class="summary-line">
+              <span class="sum-label">Стоимость блюд</span>
+              <span class="sum-value" id="sidebarItemsCost">0 ₽</span>
+            </div>
+            <div class="summary-line discount-line" id="sidebarDiscountRow" style="display: none;">
+              <span class="sum-label" id="sidebarDiscountLbl">Скидка</span>
+              <span class="sum-value text-discount" id="sidebarDiscountVal">-0 ₽</span>
+            </div>
+            <div class="summary-line" id="sidebarDeliveryRow">
+              <span class="sum-label">Доставка курьером</span>
+              <span class="sum-value" id="sidebarDeliveryCost">150 ₽</span>
+            </div>
+            <div class="summary-line total-line">
+              <span class="total-label">Итого к оплате</span>
+              <span class="total-value" id="sidebarTotalCost">0 ₽</span>
+            </div>
+
+            <!-- Главная кнопка оформления -->
+            <button type="button" class="btn-primary-checkout" id="btnSidebarCheckout" disabled>
+              <span class="checkout-btn-text">Оформить заказ</span>
+              <span class="checkout-btn-sum" id="btnSidebarCheckoutSum">0 ₽</span>
+            </button>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- =======================================================================
+       4. МОБИЛЬНАЯ ПЛАВАЮЩАЯ КНОПКА КОРЗИНЫ & ШИТ
+       ======================================================================= -->
+  <aside class="mobile-float-cart-bar" id="mobileFloatCartBar">
+    <button type="button" class="btn-mobile-float-cart" id="btnMobileFloatCart">
+      <div class="m-float-left">
+        <span class="m-float-bag">🛍️</span>
+        <span class="m-float-count-badge" id="mFloatCountBadge">0</span>
+        <span class="m-float-text">Открыть корзину</span>
+      </div>
+      <div class="m-float-right">
+        <span class="m-float-sum" id="mFloatSum">0 ₽</span>
+        <span class="m-float-arrow">›</span>
+      </div>
+    </button>
+  </aside>
+
+  <!-- Мобильная нижняя навигационная панель -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button type="button" class="bottom-nav-item active" id="mNavMenu">
+      <span class="b-nav-icon">☕</span>
+      <span class="b-nav-label">Меню</span>
+    </button>
+    <button type="button" class="bottom-nav-item" id="mNavPromos">
+      <span class="b-nav-icon">🎁</span>
+      <span class="b-nav-label">Акции</span>
+    </button>
+    <button type="button" class="bottom-nav-item" id="mNavCart">
+      <span class="b-nav-icon">🛍️</span>
+      <span class="b-nav-label">Корзина</span>
+      <span class="b-nav-badge" id="mNavCartBadge" style="display: none;">0</span>
+    </button>
+    <button type="button" class="bottom-nav-item" id="mNavAbout">
+      <span class="b-nav-icon">📍</span>
+      <span class="b-nav-label">Инфо</span>
+    </button>
+  </nav>
+
+  <!-- =======================================================================
+       5. МОДАЛЬНОЕ ОКНО: МОДИФИКАТОРЫ И ВЫБОР МОЛОКА/СИРОПА (Product Detail)
+       ======================================================================= -->
+  <div class="modal-overlay" id="productModalOverlay" aria-hidden="true">
+    <div class="modal-window product-modal-window">
+      <button type="button" class="modal-close-btn" id="btnProductModalClose" aria-label="Закрыть">✕</button>
+      
+      <div class="product-modal-scroll">
+        <div class="product-modal-image-wrap">
+          <img src="img/cappuccino.jpg" id="modalProductImg" alt="Блюдо" class="product-modal-img">
+          <div class="product-modal-tags" id="modalProductTags">
+            <span class="card-badge gold">Хит</span>
+          </div>
+        </div>
+
+        <div class="product-modal-content">
+          <div class="modal-title-row">
+            <h3 class="modal-product-title" id="modalProductTitle">Капучино шелковистый</h3>
+            <span class="modal-product-weight" id="modalProductWeight">350 мл</span>
+          </div>
+          <p class="modal-product-desc" id="modalProductDesc">Классический кофейный напиток с плотной глянцевой пенкой.</p>
+          <div class="modal-product-composition" id="modalProductComposition">100% арабика, фермерское молоко 3.2%</div>
+
+          <!-- Секции модификаторов -->
+          <div class="modifiers-container" id="modalModifiersContainer">
+            <!-- Генерируются динамически -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Фиксированная нижняя плашка с кнопкой добавления -->
+      <div class="product-modal-footer">
+        <div class="modal-qty-stepper">
+          <button type="button" class="stepper-btn" id="btnModalQtyDec">–</button>
+          <span class="stepper-val" id="modalQtyVal">1</span>
+          <button type="button" class="stepper-btn" id="btnModalQtyInc">+</button>
+        </div>
+        <button type="button" class="btn-modal-add" id="btnModalAddToCart">
+          <span>Добавить в заказ</span>
+          <strong id="modalAddPriceSum">190 ₽</strong>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       6. МОДАЛЬНОЕ ОКНО: ВЫБОР ФИЛИАЛА / АДРЕСА ДОСТАВКИ
+       ======================================================================= -->
+  <div class="modal-overlay" id="addressModalOverlay" aria-hidden="true">
+    <div class="modal-window address-modal-window">
+      <button type="button" class="modal-close-btn" id="btnAddressModalClose" aria-label="Закрыть">✕</button>
+      
+      <div class="modal-header-simple">
+        <h3 class="modal-headline">Как вы хотите получить заказ?</h3>
+        <p class="modal-sub">Выберите удобный способ получения в Краснодаре</p>
+      </div>
+
+      <div class="address-tab-switch">
+        <button type="button" class="tab-btn active" id="tabBranchPickup">🛍️ Самовывоз из кофейни (-10%)</button>
+        <button type="button" class="tab-btn" id="tabCourierDelivery">🛵 Доставка курьером</button>
+      </div>
+
+      <!-- Вкладка 1: Филиалы -->
+      <div class="address-tab-content active" id="tabContentPickup">
+        <div class="branches-list">
+          <label class="branch-option-card active">
+            <input type="radio" name="branchChoice" value="Любимово, 5/1" checked>
+            <div class="branch-info">
+              <strong class="branch-name">мкр. Любимово, 5/1 (1 этаж)</strong>
+              <span class="branch-time">⏰ 07:00 – 22:00 • Открыто</span>
+              <p class="branch-note">Просторная кофейня, розетки, столики на улице, pet-friendly</p>
+            </div>
+            <span class="branch-check">✓</span>
+          </label>
+
+          <label class="branch-option-card">
+            <input type="radio" name="branchChoice" value="ул. Адмирала Макарова, 5к4">
+            <div class="branch-info">
+              <strong class="branch-name">ул. им. Адмирала Макарова, 5, корп. 4</strong>
+              <span class="branch-time">⏰ 07:00 – 22:00 • Открыто</span>
+              <p class="branch-note">мкр. Образцово. Уютная кофейня у дома, свежая выпечка</p>
+            </div>
+            <span class="branch-check">✓</span>
+          </label>
+        </div>
+        <button type="button" class="btn-confirm-address" id="btnConfirmBranch">Выбрать эту кофейню</button>
+      </div>
+
+      <!-- Вкладка 2: Доставка курьером -->
+      <div class="address-tab-content" id="tabContentDelivery">
+        <div class="delivery-form-fields">
+          <div class="form-group">
+            <label class="input-label">Город и улица *</label>
+            <input type="text" id="deliveryStreetInput" class="modal-input" placeholder="Краснодар, ул. Петра Метальникова, 3/1" value="Краснодар, мкр. Любимово">
+          </div>
+          <div class="form-row-three">
+            <div class="form-group">
+              <label class="input-label">Квартира/Офис</label>
+              <input type="text" id="deliveryAptInput" class="modal-input" placeholder="45">
+            </div>
+            <div class="form-group">
+              <label class="input-label">Подъезд</label>
+              <input type="text" id="deliveryEntranceInput" class="modal-input" placeholder="2">
+            </div>
+            <div class="form-group">
+              <label class="input-label">Этаж</label>
+              <input type="text" id="deliveryFloorInput" class="modal-input" placeholder="7">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="input-label">Домофон или комментарий для курьера</label>
+            <input type="text" id="deliveryCommentInput" class="modal-input" placeholder="Код 45К, оставьте у двери">
+          </div>
+        </div>
+        <button type="button" class="btn-confirm-address" id="btnConfirmDelivery">Доставлять по этому адресу</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       7. МОДАЛЬНОЕ ОКНО: ОФОРМЛЕНИЕ ЗАКАЗА (Чекаут в 1-2 клика)
+       ======================================================================= -->
+  <div class="modal-overlay" id="checkoutModalOverlay" aria-hidden="true">
+    <div class="modal-window checkout-modal-window">
+      <button type="button" class="modal-close-btn" id="btnCheckoutModalClose" aria-label="Закрыть">✕</button>
+      
+      <div class="modal-header-simple">
+        <h3 class="modal-headline">Оформление заказа</h3>
+        <p class="modal-sub">Без регистрации и спама — только подтверждение по телефону</p>
+      </div>
+
+      <div class="checkout-scroll-body">
+        
+        <!-- Шаг 1: Контактные данные -->
+        <div class="checkout-section">
+          <h4 class="checkout-sec-title">1. Контактные данные</h4>
+          <div class="form-row-two">
+            <div class="form-group">
+              <label class="input-label">Ваше имя *</label>
+              <input type="text" id="orderClientName" class="modal-input" placeholder="Александр" value="Гость Кофейни">
+            </div>
+            <div class="form-group">
+              <label class="input-label">Телефон для связи *</label>
+              <input type="tel" id="orderClientPhone" class="modal-input" placeholder="+7 (999) 000-00-00" value="+7 (918) 555-43-21">
+            </div>
+          </div>
+        </div>
+
+        <!-- Шаг 2: Способ получения и адрес -->
+        <div class="checkout-section">
+          <h4 class="checkout-sec-title">2. Получение</h4>
+          <div class="checkout-receiving-summary" id="checkoutReceivingSummary">
+            <span class="recv-icon">📍</span>
+            <div class="recv-details">
+              <strong id="checkoutRecvTitle">Самовывоз (-10%)</strong>
+              <span id="checkoutRecvDesc">мкр. Любимово, 5/1 (1 этаж)</span>
+            </div>
+            <button type="button" class="btn-inline-change" id="btnCheckoutChangeAddress">Изменить</button>
+          </div>
+        </div>
+
+        <!-- Шаг 3: Способ оплаты (Чекаут уровня Яндекс Еды: При получении или Онлайн) -->
+        <div class="checkout-section">
+          <h4 class="checkout-sec-title">3. Способ оплаты</h4>
+          <div class="payment-methods-grid">
+            
+            <label class="payment-card-option active" id="payMethodCardCourier">
+              <input type="radio" name="payMethod" value="courier" checked>
+              <div class="pay-option-content">
+                <span class="pay-opt-icon">💵</span>
+                <div>
+                  <strong>При получении курьеру / бариста</strong>
+                  <span class="pay-opt-sub">Наличными или терминалом при выдаче</span>
+                </div>
+              </div>
+              <span class="pay-check-circle">✓</span>
+            </label>
+
+            <label class="payment-card-option" id="payMethodCardOnline">
+              <input type="radio" name="payMethod" value="online">
+              <div class="pay-option-content">
+                <span class="pay-opt-icon">💳</span>
+                <div>
+                  <strong>Онлайн картой / СБП</strong>
+                  <span class="pay-opt-sub">Быстрая оплата без комиссии через банк</span>
+                </div>
+              </div>
+              <span class="pay-check-circle">✓</span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Шаг 4: Комментарий к заказу -->
+        <div class="checkout-section">
+          <h4 class="checkout-sec-title">4. Пожелания бариста</h4>
+          <div class="form-group">
+            <input type="text" id="orderCommentInput" class="modal-input" placeholder="Например: кофе погорячее, корицы побольше, сдача с 1000 ₽">
+          </div>
+        </div>
+
+        <!-- Сводка заказа -->
+        <div class="checkout-order-summary-box">
+          <div class="co-sum-line">
+            <span>Позиций в заказе:</span>
+            <span id="coItemsCount">0 шт</span>
+          </div>
+          <div class="co-sum-line" id="coDiscountLine" style="display: none;">
+            <span>Скидка:</span>
+            <span class="text-discount" id="coDiscountVal">-0 ₽</span>
+          </div>
+          <div class="co-sum-line" id="coDeliveryLine">
+            <span>Доставка:</span>
+            <span id="coDeliveryVal">0 ₽</span>
+          </div>
+          <div class="co-sum-line co-total">
+            <strong>Итого к оплате:</strong>
+            <strong class="co-total-num" id="coTotalSum">0 ₽</strong>
+          </div>
+        </div>
+
+        <p class="legal-notice">
+          🔒 Нажимая «Подтвердить заказ», вы соглашаетесь с условиями пользовательского соглашения и политикой обработки персональных данных согласно 152-ФЗ РФ.
+        </p>
+
+      </div>
+
+      <div class="modal-footer-simple">
+        <button type="button" class="btn-submit-order" id="btnSubmitFinalOrder">
+          <span>Подтвердить заказ</span>
+          <strong id="btnSubmitOrderSum">0 ₽</strong>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       8. МОДАЛЬНОЕ ОКНО: ТРЕКЕР ЗАКАЗА (Живой статус приготовления и доставки)
+       ======================================================================= -->
+  <div class="modal-overlay" id="orderTrackerModalOverlay" aria-hidden="true">
+    <div class="modal-window tracker-modal-window">
+      <button type="button" class="modal-close-btn" id="btnTrackerModalClose" aria-label="Закрыть">✕</button>
+
+      <div class="tracker-header">
+        <div class="tracker-status-pill" id="trackerStatusPill">Готовится на кухне ☕</div>
+        <h3 class="tracker-order-num" id="trackerOrderNum">Заказ № 5C-4819</h3>
+        <p class="tracker-est-time">Примерное время: <strong id="trackerTimeRemain">25–35 мин</strong></p>
+      </div>
+
+      <!-- Живой визуальный прогресс-бар этапов -->
+      <div class="tracker-stepper-visual">
+        <div class="step-point completed" id="stepPoint1">
+          <div class="step-dot">✓</div>
+          <span class="step-label">Принят</span>
+        </div>
+        <div class="step-line completed" id="stepLine1"></div>
+        <div class="step-point active" id="stepPoint2">
+          <div class="step-dot">☕</div>
+          <span class="step-label">Готовится</span>
+        </div>
+        <div class="step-line" id="stepLine2"></div>
+        <div class="step-point" id="stepPoint3">
+          <div class="step-dot">🛵</div>
+          <span class="step-label">В пути</span>
+        </div>
+        <div class="step-line" id="stepLine3"></div>
+        <div class="step-point" id="stepPoint4">
+          <div class="step-dot">🎉</div>
+          <span class="step-label">Выдан</span>
+        </div>
+      </div>
+
+      <!-- Детали статуса -->
+      <div class="tracker-status-card">
+        <div class="status-avatar-icon" id="trackerStatusIcon">👨‍🍳</div>
+        <div class="status-text-block">
+          <strong id="trackerStatusHeading">Бариста смалывает зерна свежей обжарки</strong>
+          <p id="trackerStatusText">Готовим ваш кофе и выпекаем горячие круассаны. Заказ будет упакован в термосумку для сохранения тепла.</p>
+        </div>
+      </div>
+
+      <!-- Сводка заказанного -->
+      <div class="tracker-items-summary" id="trackerItemsSummary">
+        <!-- Заполняется через JS -->
+      </div>
+
+      <!-- Кнопки действий -->
+      <div class="tracker-actions-row">
+        <a href="tel:+79132105087" class="btn-tracker-phone">
+          📞 Связаться с кофейней
+        </a>
+        <button type="button" class="btn-tracker-new-order" id="btnTrackerNewOrder">
+          Сделать новый заказ
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       9. МОДАЛЬНОЕ ОКНО: О КОФЕЙНЕ «5 ЧУВСТВ» И КОНТАКТЫ
+       ======================================================================= -->
+  <div class="modal-overlay" id="aboutModalOverlay" aria-hidden="true">
+    <div class="modal-window about-modal-window">
+      <button type="button" class="modal-close-btn" id="btnAboutModalClose" aria-label="Закрыть">✕</button>
+
+      <div class="about-hero-img-wrap">
+        <img src="img/hero-cover.jpg" alt="Кофейня 5 Чувств" class="about-hero-img">
+        <div class="about-hero-badge">⭐ 4.8 Рейтинг на Яндекс Картах</div>
+      </div>
+
+      <div class="about-content-scroll">
+        <h3 class="about-title">Кофейня & Пекарня «5 ЧУВСТВ»</h3>
+        <p class="about-text">
+          Мы открылись в Краснодаре, чтобы дарить гостям настоящее кофейное удовольствие. 
+          Работаем только на 100% спешелти арабике свежей обжарки, выпекаем круассаны на новозеландском масле 82.5% 
+          и подаем завтраки целый день с 7 утра до 10 вечера.
+        </p>
+
+        <!-- Филиалы -->
+        <h4 class="about-sec-heading">Наши кофейни в Краснодаре:</h4>
+        <div class="about-branches-grid">
+          
+          <div class="about-branch-item">
+            <strong>📍 Филиал 1: мкр. Любимово, 5/1</strong>
+            <p>1 этаж • Ежедневно 07:00 – 22:00</p>
+            <p class="branch-features">Просторный зал, розетки у столов, летняя веранда, можно с собаками (pet-friendly), быстрый Wi-Fi.</p>
+            <a href="https://yandex.ru/maps/org/5_chuvstv/137565727500/" target="_blank" rel="noopener" class="link-maps">
+              Открыть на Яндекс Картах ↗
+            </a>
+          </div>
+
+          <div class="about-branch-item">
+            <strong>📍 Филиал 2: ул. им. Адмирала Макарова, 5к4</strong>
+            <p>мкр. Образцово • Ежедневно 07:00 – 22:00</p>
+            <p class="branch-features">Уютная атмосфера у дома, свежая утренняя выпечка, большой выбор десертов и кофе с собой.</p>
+            <a href="https://yandex.ru/maps/" target="_blank" rel="noopener" class="link-maps">
+              Построить маршрут ↗
+            </a>
+          </div>
+
+        </div>
+
+        <div class="about-contacts-block">
+          <div>📞 Телефон единого заказа: <a href="tel:+79132105087"><strong>+7 (913) 210-50-87</strong></a></div>
+          <div>🐕 Pet-friendly: мы рады собакам любых пород</div>
+          <div>💻 Работа с ноутбуком: удобные розетки и высокоскоростной Wi-Fi</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       10. МОДАЛЬНОЕ ОКНО: БОНУСНАЯ ПРОГРАММА И ПРОМОКОДЫ
+       ======================================================================= -->
+  <div class="modal-overlay" id="loyaltyModalOverlay" aria-hidden="true">
+    <div class="modal-window loyalty-modal-window">
+      <button type="button" class="modal-close-btn" id="btnLoyaltyModalClose" aria-label="Закрыть">✕</button>
+
+      <div class="modal-header-simple">
+        <h3 class="modal-headline">Бонусы & Промокоды «5 ЧУВСТВ»</h3>
+        <p class="modal-sub">Копите бонусы с каждого заказа и пользуйтесь секретными промокодами</p>
+      </div>
+
+      <div class="loyalty-body-scroll">
+        
+        <!-- Карточка баланса -->
+        <div class="bonus-balance-card">
+          <div class="bb-left">
+            <span class="bb-sub">Ваш баланс лояльности</span>
+            <strong class="bb-val" id="modalBonusBalanceNum">350 бонусов</strong>
+            <span class="bb-rules">1 бонус = 1 рубль • Оплата до 50% чека</span>
+          </div>
+          <div class="bb-badge">⭐ GOLD</div>
+        </div>
+
+        <h4 class="loyalty-sec-title">Действующие промокоды кофейни:</h4>
+        <div class="promos-available-list">
+          
+          <div class="promo-item-pill" data-code="5ЧУВСТВ">
+            <div class="pip-left">
+              <strong class="pip-code">5ЧУВСТВ</strong>
+              <span class="pip-desc">Скидка 15% на первый заказ от 500 ₽</span>
+            </div>
+            <button type="button" class="btn-pip-copy">Применить</button>
+          </div>
+
+          <div class="promo-item-pill" data-code="УТРО">
+            <div class="pip-left">
+              <strong class="pip-code">УТРО</strong>
+              <span class="pip-desc">Скидка 10% на утренний кофе и комбо</span>
+            </div>
+            <button type="button" class="btn-pip-copy">Применить</button>
+          </div>
+
+          <div class="promo-item-pill" data-code="САМОВЫВОЗ">
+            <div class="pip-left">
+              <strong class="pip-code">САМОВЫВОЗ</strong>
+              <span class="pip-desc">Скидка 10% при заказе навынос</span>
+            </div>
+            <button type="button" class="btn-pip-copy">Применить</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Уведомления Toast -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Скрипт приложения -->
+  <script src="app.js"></script>
+</body>
+</html>
